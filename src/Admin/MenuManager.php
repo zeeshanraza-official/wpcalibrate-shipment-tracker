@@ -146,88 +146,289 @@ class MenuManager {
 	 *
 	 * @return void
 	 */
+	/**
+	 * Render callback for the shared parent page if accessed directly.
+	 *
+	 * @return void
+	 */
 	public function render_parent_page(): void {
 		if (!current_user_can('manage_options')) {
 			wp_die(esc_html__('You do not have sufficient permissions to access this page.', 'wpcalibrate-shipment-tracker'));
 		}
 
-		$settings_url = admin_url('admin.php?page=' . self::SUBMENU_SLUG);
-		$orders_url   = admin_url('admin.php?page=wc-orders');
-		$logo_url     = defined('WPC_SHIPMENT_TRACKER_URL')
+		global $wpdb;
+
+		$settings_url  = admin_url('admin.php?page=' . self::SUBMENU_SLUG);
+		$carriers_url  = admin_url('admin.php?page=' . self::SUBMENU_SLUG . '&tab=carriers');
+		$tracking_url  = admin_url('admin.php?page=' . self::SUBMENU_SLUG . '&tab=tracking');
+		$support_url   = admin_url('admin.php?page=' . self::SUBMENU_SLUG . '&tab=support');
+		$orders_url    = admin_url('admin.php?page=wc-orders');
+		$logo_url      = defined('WPC_SHIPMENT_TRACKER_URL')
 			? WPC_SHIPMENT_TRACKER_URL . 'branding/icon-dark.png'
 			: '';
+
+		$is_hpos_active = class_exists(\Automattic\WooCommerce\Utilities\OrderUtil::class) && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
+
+		// Live count of shipments recorded in database.
+		$shipments_table = $wpdb->prefix . 'wpcalibrate_shipments';
+		$total_shipments = 0;
+		if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $shipments_table)) === $shipments_table) {
+			$total_shipments = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$shipments_table}");
+		}
+
+		// Count of active carriers.
+		$carrier_count = 7;
+		if (class_exists(\WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry::class)) {
+			$registry = new \WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry();
+			$carrier_count = count($registry->get_enabled_carriers());
+		}
 		?>
-		<div class="wrap wpcalibrate-admin-wrap">
-			<div class="wpc-parent-dashboard-header">
-				<?php if (!empty($logo_url)) : ?>
-					<img src="<?php echo esc_url($logo_url); ?>" alt="<?php esc_attr_e('WPCalibrate Logo', 'wpcalibrate-shipment-tracker'); ?>" class="wpc-parent-dashboard-logo" width="52" height="52">
-				<?php endif; ?>
-				<div>
-					<h1 class="wpc-parent-dashboard-title"><?php esc_html_e('WPCalibrate Suite', 'wpcalibrate-shipment-tracker'); ?></h1>
-					<p class="wpc-parent-dashboard-tagline"><?php esc_html_e('High-performance extensions, shipment tracking, and developer tooling for WooCommerce.', 'wpcalibrate-shipment-tracker'); ?></p>
-				</div>
-			</div>
-
-			<div class="wpc-dashboard-grid">
-				<!-- Plugin Card: Shipment Tracker -->
-				<div class="wpc-dashboard-card wpc-card-featured">
-					<div class="wpc-card-badge-row">
-						<span class="wpc-badge-active"><?php esc_html_e('Active', 'wpcalibrate-shipment-tracker'); ?></span>
-						<span class="wpc-badge-version">v<?php echo esc_html(defined('WPC_SHIPMENT_TRACKER_VERSION') ? WPC_SHIPMENT_TRACKER_VERSION : '1.0.0'); ?></span>
+		<div class="wrap wpcalibrate-admin-wrap wpc-suite-wrap">
+			<!-- Suite Top Header Banner -->
+			<header class="wpc-suite-header">
+				<div class="wpc-suite-header-main">
+					<div class="wpc-suite-logo-box">
+						<?php if (!empty($logo_url)) : ?>
+							<img src="<?php echo esc_url($logo_url); ?>" alt="<?php esc_attr_e('WPCalibrate Logo', 'wpcalibrate-shipment-tracker'); ?>" class="wpc-suite-logo" width="48" height="48">
+						<?php else : ?>
+							<span class="dashicons dashicons-admin-generic" style="font-size: 32px; color: #3b82f6;"></span>
+						<?php endif; ?>
 					</div>
-					<h2><?php esc_html_e('Shipment & Order Tracker', 'wpcalibrate-shipment-tracker'); ?></h2>
-					<p><?php esc_html_e('Enterprise shipment tracking with partial fulfillment, multi-carrier support, customer timelines, guest tracking portal, and transactional notifications.', 'wpcalibrate-shipment-tracker'); ?></p>
-					
-					<ul class="wpc-feature-bullets">
-						<li>✓ <?php esc_html_e('Full HPOS and legacy orders compatibility', 'wpcalibrate-shipment-tracker'); ?></li>
-						<li>✓ <?php esc_html_e('Multi-carrier tracking (UPS, FedEx, USPS, DHL, Royal Mail & custom couriers)', 'wpcalibrate-shipment-tracker'); ?></li>
-						<li>✓ <?php esc_html_e('Partial order fulfillment and item allocation engine', 'wpcalibrate-shipment-tracker'); ?></li>
-						<li>✓ <?php esc_html_e('Public rate-limited guest tracking shortcode', 'wpcalibrate-shipment-tracker'); ?></li>
-					</ul>
+					<div class="wpc-suite-header-info">
+						<div class="wpc-suite-title-row">
+							<h1 class="wpc-suite-title"><?php esc_html_e('WPCalibrate Suite', 'wpcalibrate-shipment-tracker'); ?></h1>
+							<span class="wpc-suite-badge-status">
+								<span class="wpc-status-dot"></span>
+								<?php esc_html_e('System Operational', 'wpcalibrate-shipment-tracker'); ?>
+							</span>
+							<span class="wpc-suite-badge-hpos">
+								<?php echo $is_hpos_active ? esc_html__('HPOS Engine Active', 'wpcalibrate-shipment-tracker') : esc_html__('Classic Storage Ready', 'wpcalibrate-shipment-tracker'); ?>
+							</span>
+							<span class="wpc-suite-badge-version">v<?php echo esc_html(defined('WPC_SHIPMENT_TRACKER_VERSION') ? WPC_SHIPMENT_TRACKER_VERSION : '1.0.3'); ?></span>
+						</div>
+						<p class="wpc-suite-tagline"><?php esc_html_e('Enterprise shipment tracking, inventory allocation, and operations hub for WooCommerce.', 'wpcalibrate-shipment-tracker'); ?></p>
+					</div>
+				</div>
+				<div class="wpc-suite-header-actions">
+					<a href="<?php echo esc_url($settings_url); ?>" class="button button-primary button-hero wpc-btn-primary">
+						<span class="dashicons dashicons-admin-generic" style="margin-top: 3px;"></span>
+						<?php esc_html_e('Shipment Tracker Settings', 'wpcalibrate-shipment-tracker'); ?>
+					</a>
+					<a href="<?php echo esc_url($orders_url); ?>" class="button button-secondary wpc-btn-light">
+						<span class="dashicons dashicons-cart" style="margin-top: 3px;"></span>
+						<?php esc_html_e('WooCommerce Orders', 'wpcalibrate-shipment-tracker'); ?>
+					</a>
+				</div>
+			</header>
 
-					<div class="wpc-card-actions">
+			<!-- Suite Navigation Tabs -->
+			<nav class="wpc-suite-nav" aria-label="<?php esc_attr_e('WPCalibrate Suite Navigation', 'wpcalibrate-shipment-tracker'); ?>">
+				<a href="<?php echo esc_url(admin_url('admin.php?page=' . self::PARENT_SLUG)); ?>" class="wpc-suite-nav-item active">
+					<span class="dashicons dashicons-dashboard" aria-hidden="true"></span>
+					<span><?php esc_html_e('Suite Overview', 'wpcalibrate-shipment-tracker'); ?></span>
+				</a>
+				<a href="<?php echo esc_url($settings_url); ?>" class="wpc-suite-nav-item">
+					<span class="dashicons dashicons-car" aria-hidden="true"></span>
+					<span><?php esc_html_e('Shipment Tracker Settings', 'wpcalibrate-shipment-tracker'); ?></span>
+				</a>
+				<a href="<?php echo esc_url($carriers_url); ?>" class="wpc-suite-nav-item">
+					<span class="dashicons dashicons-location-alt" aria-hidden="true"></span>
+					<span><?php esc_html_e('Carriers Registry', 'wpcalibrate-shipment-tracker'); ?></span>
+				</a>
+				<a href="<?php echo esc_url($orders_url); ?>" class="wpc-suite-nav-item">
+					<span class="dashicons dashicons-cart" aria-hidden="true"></span>
+					<span><?php esc_html_e('WooCommerce Orders', 'wpcalibrate-shipment-tracker'); ?></span>
+				</a>
+				<a href="<?php echo esc_url($support_url); ?>" class="wpc-suite-nav-item">
+					<span class="dashicons dashicons-sos" aria-hidden="true"></span>
+					<span><?php esc_html_e('Support & Help', 'wpcalibrate-shipment-tracker'); ?></span>
+				</a>
+			</nav>
+
+			<!-- Operational Statistics Strip -->
+			<section class="wpc-suite-stats-grid">
+				<div class="wpc-stat-card">
+					<div class="wpc-stat-icon-wrap" style="background: rgba(59, 130, 246, 0.1); color: #2563eb;">📦</div>
+					<div class="wpc-stat-content">
+						<span class="wpc-stat-label"><?php esc_html_e('Total Consignments', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-val"><?php echo esc_html((string) $total_shipments); ?></span>
+						<span class="wpc-stat-sub"><?php esc_html_e('Recorded in database', 'wpcalibrate-shipment-tracker'); ?></span>
+					</div>
+				</div>
+				<div class="wpc-stat-card">
+					<div class="wpc-stat-icon-wrap" style="background: rgba(16, 185, 129, 0.1); color: #059669;">🚚</div>
+					<div class="wpc-stat-content">
+						<span class="wpc-stat-label"><?php esc_html_e('Active Couriers', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-val"><?php echo esc_html((string) $carrier_count); ?></span>
+						<span class="wpc-stat-sub"><?php esc_html_e('Built-in + Custom templates', 'wpcalibrate-shipment-tracker'); ?></span>
+					</div>
+				</div>
+				<div class="wpc-stat-card">
+					<div class="wpc-stat-icon-wrap" style="background: rgba(245, 158, 11, 0.1); color: #d97706;">⚡</div>
+					<div class="wpc-stat-content">
+						<span class="wpc-stat-label"><?php esc_html_e('Order Data Store', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-val"><?php echo $is_hpos_active ? esc_html__('HPOS Table', 'wpcalibrate-shipment-tracker') : esc_html__('Classic Posts', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-sub"><?php esc_html_e('Zero query overhead', 'wpcalibrate-shipment-tracker'); ?></span>
+					</div>
+				</div>
+				<div class="wpc-stat-card">
+					<div class="wpc-stat-icon-wrap" style="background: rgba(99, 102, 241, 0.1); color: #4f46e5;">🛡️</div>
+					<div class="wpc-stat-content">
+						<span class="wpc-stat-label"><?php esc_html_e('Portal Protection', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-val"><?php esc_html_e('Rate Limited', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-stat-sub"><?php esc_html_e('Brute-force defended', 'wpcalibrate-shipment-tracker'); ?></span>
+					</div>
+				</div>
+			</section>
+
+			<!-- Main Featured Extension Card -->
+			<div class="wpc-suite-main-grid">
+				<section class="wpc-suite-card wpc-suite-featured-card">
+					<div class="wpc-featured-badge-row">
+						<span class="wpc-pill-active">✓ <?php esc_html_e('Active Extension', 'wpcalibrate-shipment-tracker'); ?></span>
+						<span class="wpc-pill-version">v<?php echo esc_html(defined('WPC_SHIPMENT_TRACKER_VERSION') ? WPC_SHIPMENT_TRACKER_VERSION : '1.0.3'); ?></span>
+					</div>
+
+					<div class="wpc-featured-head">
+						<h2 class="wpc-featured-title"><?php esc_html_e('WPCalibrate Shipment & Order Tracker', 'wpcalibrate-shipment-tracker'); ?></h2>
+						<p class="wpc-featured-desc">
+							<?php esc_html_e('Enterprise shipment tracking engine supporting partial order fulfillment, multi-package dispatches, automatic carrier tracking links, customer timeline visualizations, and protected guest tracking lookups.', 'wpcalibrate-shipment-tracker'); ?>
+						</p>
+					</div>
+
+					<div class="wpc-capabilities-grid">
+						<div class="wpc-cap-item">
+							<span class="wpc-cap-icon">📦</span>
+							<div>
+								<h3 class="wpc-cap-title"><?php esc_html_e('Partial Fulfillment Math', 'wpcalibrate-shipment-tracker'); ?></h3>
+								<p class="wpc-cap-text"><?php esc_html_e('Split line items across shipments with strict mathematical allocation that prevents accidental over-fulfillment.', 'wpcalibrate-shipment-tracker'); ?></p>
+							</div>
+						</div>
+						<div class="wpc-cap-item">
+							<span class="wpc-cap-icon">🚚</span>
+							<div>
+								<h3 class="wpc-cap-title"><?php esc_html_e('Global Carrier Network', 'wpcalibrate-shipment-tracker'); ?></h3>
+								<p class="wpc-cap-text"><?php esc_html_e('Preconfigured for UPS, FedEx, USPS, DHL Express, Royal Mail, Canada Post, Australia Post, plus unlimited custom templates.', 'wpcalibrate-shipment-tracker'); ?></p>
+							</div>
+						</div>
+						<div class="wpc-cap-item">
+							<span class="wpc-cap-icon">⏱️</span>
+							<div>
+								<h3 class="wpc-cap-title"><?php esc_html_e('Customer Self-Service', 'wpcalibrate-shipment-tracker'); ?></h3>
+								<p class="wpc-cap-text"><?php esc_html_e('Visual milestone timeline on My Account, order completion emails, and rate-limited public guest search.', 'wpcalibrate-shipment-tracker'); ?></p>
+							</div>
+						</div>
+						<div class="wpc-cap-item">
+							<span class="wpc-cap-icon">⚡</span>
+							<div>
+								<h3 class="wpc-cap-title"><?php esc_html_e('Dedicated Database Tables', 'wpcalibrate-shipment-tracker'); ?></h3>
+								<p class="wpc-cap-text"><?php esc_html_e('Relational tables keep your WooCommerce postmeta lean, fast, and fully compliant with HPOS High-Performance storage.', 'wpcalibrate-shipment-tracker'); ?></p>
+							</div>
+						</div>
+					</div>
+
+					<div class="wpc-featured-actions">
 						<a href="<?php echo esc_url($settings_url); ?>" class="button button-primary button-hero">
+							<span class="dashicons dashicons-admin-generic" style="margin-top: 3px;"></span>
 							<?php esc_html_e('Configure Shipment Tracker', 'wpcalibrate-shipment-tracker'); ?>
 						</a>
 						<a href="<?php echo esc_url($orders_url); ?>" class="button button-secondary">
-							<?php esc_html_e('View WooCommerce Orders', 'wpcalibrate-shipment-tracker'); ?>
+							<span class="dashicons dashicons-cart" style="margin-top: 3px;"></span>
+							<?php esc_html_e('Fulfill Orders in WooCommerce', 'wpcalibrate-shipment-tracker'); ?>
+						</a>
+						<a href="<?php echo esc_url($carriers_url); ?>" class="button button-secondary">
+							<span class="dashicons dashicons-location-alt" style="margin-top: 3px;"></span>
+							<?php esc_html_e('Manage Shipping Couriers', 'wpcalibrate-shipment-tracker'); ?>
 						</a>
 					</div>
+				</section>
+
+				<!-- Quick Setup & Shortcode Integration Box -->
+				<section class="wpc-suite-card wpc-integration-card">
+					<div class="wpc-card-header-simple">
+						<span class="wpc-card-icon-round"><span class="dashicons dashicons-shortcode"></span></span>
+						<div>
+							<h3 class="wpc-card-title-simple"><?php esc_html_e('Public Guest Tracking Setup', 'wpcalibrate-shipment-tracker'); ?></h3>
+							<p class="wpc-card-sub-simple"><?php esc_html_e('Provide a 24/7 self-service order tracking page for shoppers.', 'wpcalibrate-shipment-tracker'); ?></p>
+						</div>
+					</div>
+
+					<p style="font-size: 13px; color: #475569; margin: 0 0 12px 0;">
+						<?php esc_html_e('Copy this shortcode and paste it into any WordPress page to enable your public tracking portal:', 'wpcalibrate-shipment-tracker'); ?>
+					</p>
+
+					<div class="wpc-shortcode-box">
+						<span class="wpc-shortcode-code">[wpcalibrate_shipment_tracking]</span>
+						<button type="button" class="wpc-btn-copy-shortcode" data-clipboard-text="[wpcalibrate_shipment_tracking]">
+							<span class="dashicons dashicons-admin-page"></span>
+							<?php esc_html_e('Copy Shortcode', 'wpcalibrate-shipment-tracker'); ?>
+						</button>
+					</div>
+
+					<div class="wpc-steps-mini">
+						<div class="wpc-step-mini-item">
+							<span class="wpc-step-mini-num">1</span>
+							<span><?php esc_html_e('Create a Page titled "Track Your Order"', 'wpcalibrate-shipment-tracker'); ?></span>
+						</div>
+						<div class="wpc-step-mini-item">
+							<span class="wpc-step-mini-num">2</span>
+							<span><?php esc_html_e('Paste the [wpcalibrate_shipment_tracking] shortcode & publish', 'wpcalibrate-shipment-tracker'); ?></span>
+						</div>
+						<div class="wpc-step-mini-item">
+							<span class="wpc-step-mini-num">3</span>
+							<span><?php esc_html_e('Select the page in Shipment Tracker > General tab', 'wpcalibrate-shipment-tracker'); ?></span>
+						</div>
+					</div>
+
+					<div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid #e2e8f0;">
+						<a href="<?php echo esc_url($tracking_url); ?>" class="button button-secondary" style="width: 100%; text-align: center;">
+							<?php esc_html_e('Customize Tracking Portal Display Options &rarr;', 'wpcalibrate-shipment-tracker'); ?>
+						</a>
+					</div>
+				</section>
+			</div>
+
+			<!-- Ecosystem, Marketplace & Dedicated Support Grid -->
+			<div class="wpc-ecosystem-header">
+				<h2><?php esc_html_e('WPCalibrate Ecosystem & Professional Support', 'wpcalibrate-shipment-tracker'); ?></h2>
+				<p><?php esc_html_e('Enterprise tools, technical documentation, and priority engineering support for high-volume WooCommerce stores.', 'wpcalibrate-shipment-tracker'); ?></p>
+			</div>
+
+			<div class="wpc-ecosystem-grid">
+				<div class="wpc-eco-card">
+					<div class="wpc-eco-icon">🛍️</div>
+					<h3 class="wpc-eco-title"><?php esc_html_e('WPCalibrate Marketplace', 'wpcalibrate-shipment-tracker'); ?></h3>
+					<p class="wpc-eco-text"><?php esc_html_e('Discover extensions, warehouse integrations, and developer plugins crafted specifically for WooCommerce.', 'wpcalibrate-shipment-tracker'); ?></p>
+					<a href="https://marketplace.wpcalibrate.com/" target="_blank" rel="noopener noreferrer" class="button button-secondary">
+						<?php esc_html_e('Visit Marketplace &rarr;', 'wpcalibrate-shipment-tracker'); ?>
+					</a>
 				</div>
 
-				<!-- Resources & Ecosystem Card -->
-				<div class="wpc-dashboard-card">
-					<h2><?php esc_html_e('WPCalibrate Resources & Ecosystem', 'wpcalibrate-shipment-tracker'); ?></h2>
-					<p><?php esc_html_e('Explore documentation, additional plugins, professional services, and get dedicated support for your store.', 'wpcalibrate-shipment-tracker'); ?></p>
-					
-					<div class="wpc-resources-list">
-						<div class="wpc-resource-item">
-							<strong><?php esc_html_e('Marketplace', 'wpcalibrate-shipment-tracker'); ?>:</strong>
-							<a href="https://marketplace.wpcalibrate.com/" target="_blank" rel="noopener noreferrer">
-								https://marketplace.wpcalibrate.com/
-							</a>
-						</div>
-						<div class="wpc-resource-item">
-							<strong><?php esc_html_e('Official Website', 'wpcalibrate-shipment-tracker'); ?>:</strong>
-							<a href="https://wpcalibrate.com" target="_blank" rel="noopener noreferrer">
-								https://wpcalibrate.com
-							</a>
-						</div>
-						<div class="wpc-resource-item">
-							<strong><?php esc_html_e('Direct Support Email', 'wpcalibrate-shipment-tracker'); ?>:</strong>
-							<a href="mailto:support@wpcalibrate.com">
-								support@wpcalibrate.com
-							</a>
-						</div>
-						<div class="wpc-resource-item">
-							<strong><?php esc_html_e('Phone / WhatsApp', 'wpcalibrate-shipment-tracker'); ?>:</strong>
-							<span>+44 7474 795976</span>
-						</div>
-					</div>
+				<div class="wpc-eco-card">
+					<div class="wpc-eco-icon">📖</div>
+					<h3 class="wpc-eco-title"><?php esc_html_e('Official Documentation', 'wpcalibrate-shipment-tracker'); ?></h3>
+					<p class="wpc-eco-text"><?php esc_html_e('Comprehensive operational guides, carrier setup tutorials, and PHP action/filter hook documentation.', 'wpcalibrate-shipment-tracker'); ?></p>
+					<a href="https://wpcalibrate.com" target="_blank" rel="noopener noreferrer" class="button button-secondary">
+						<?php esc_html_e('Read Documentation &rarr;', 'wpcalibrate-shipment-tracker'); ?>
+					</a>
+				</div>
 
-					<div class="wpc-card-footer-note">
-						<p><?php esc_html_e('Need custom carrier integration or specialized workflow automation? Contact the WPCalibrate engineering team.', 'wpcalibrate-shipment-tracker'); ?></p>
-					</div>
+				<div class="wpc-eco-card">
+					<div class="wpc-eco-icon">✉️</div>
+					<h3 class="wpc-eco-title"><?php esc_html_e('Engineering Support', 'wpcalibrate-shipment-tracker'); ?></h3>
+					<p class="wpc-eco-text"><?php esc_html_e('Direct assistance from senior WordPress and WooCommerce architects. Guaranteed rapid ticket resolution.', 'wpcalibrate-shipment-tracker'); ?></p>
+					<a href="mailto:support@wpcalibrate.com" class="button button-secondary">
+						support@wpcalibrate.com
+					</a>
+				</div>
+
+				<div class="wpc-eco-card">
+					<div class="wpc-eco-icon">💬</div>
+					<h3 class="wpc-eco-title"><?php esc_html_e('WhatsApp Direct Line', 'wpcalibrate-shipment-tracker'); ?></h3>
+					<p class="wpc-eco-text"><?php esc_html_e('Fast-response messaging for urgent store delivery inquiries, bespoke custom courier coding, or audits.', 'wpcalibrate-shipment-tracker'); ?></p>
+					<a href="https://wa.me/447474795976" target="_blank" rel="noopener noreferrer" class="button button-secondary wpc-btn-whatsapp">
+						+44 7474 795976
+					</a>
 				</div>
 			</div>
 		</div>

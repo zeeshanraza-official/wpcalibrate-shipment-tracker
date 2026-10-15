@@ -6,7 +6,7 @@ Tested up to: 7.1.3
 Requires PHP: 8.2
 WC requires at least: 8.5
 WC tested up to: 11.2.1
-Stable tag: 1.0.0
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,12 @@ WPCalibrate Shipment Tracker processes order IDs, carrier names, tracking number
 * `wpcalibrate_shipment_tracker_guest_lookup_verification` (filter): Filter the verified order during guest tracking lookup.
 
 == Changelog ==
+
+= 1.0.3 =
+* Redesign: Enterprise WPCalibrate Suite Overview hub (admin.php?page=wpcalibrate) with live consignment metrics, operational health cards, and modern SaaS styling.
+* Enhancement: Restored settings_errors transient handling so success/error banners display reliably on all settings tabs.
+* Enhancement: Dynamic filemtime asset versioning to eliminate stale browser cache on plugin upgrades.
+* Enhancement: Added Suite Overview navigation link in Shipment Tracker settings header.
 
 = 1.0.2 =
 * Fix: Eliminated duplicate plugin folders on remote WordPress servers. Enforced single canonical installation path at wpcalibrate-shipment-tracker.

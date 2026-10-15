@@ -3,7 +3,7 @@
  * Plugin Name: WPCalibrate Shipment Tracker
  * Plugin URI: https://marketplace.wpcalibrate.com/
  * Description: Production-quality WooCommerce shipment and order tracking plugin supporting multiple shipments, partial fulfillment, carrier URL templates, and secure customer tracking.
- * Version: 1.0.0
+ * Version: 1.0.3
  * Requires at least: 6.4
  * Requires PHP: 8.2
  * WC requires at least: 8.5
@@ -23,7 +23,7 @@ declare(strict_types=1);
 defined('ABSPATH') || exit;
 
 // Plugin constants
-define('WPC_SHIPMENT_TRACKER_VERSION', '1.0.0');
+define('WPC_SHIPMENT_TRACKER_VERSION', '1.0.3');
 define('WPC_SHIPMENT_TRACKER_SCHEMA_VERSION', '1.0.0');
 define('WPC_SHIPMENT_TRACKER_FILE', __FILE__);
 define('WPC_SHIPMENT_TRACKER_PATH', plugin_dir_path(__FILE__));

@@ -1698,8 +1698,637 @@
 	}
 }
 
+/* ==========================================================================
+   WPCalibrate Suite Parent Overview Dashboard
+   ========================================================================== */
+
+.wpc-suite-wrap,
+.wpcalibrate-admin-wrap {
+	max-width: 1200px;
+	margin: 20px 20px 40px 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+	color: var(--wpc-text-body, #334155);
+}
+
+/* Suite Header Banner */
+.wpc-suite-header,
+.wpc-parent-dashboard-header {
+	background: linear-gradient(135deg, #090e1a 0%, #0f172a 40%, #1e1b4b 100%);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 16px;
+	padding: 28px 32px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	gap: 24px;
+	margin-bottom: 20px;
+	box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.3), 0 8px 10px -6px rgba(15, 23, 42, 0.2);
+	position: relative;
+	overflow: hidden;
+}
+
+.wpc-suite-header::after {
+	content: "";
+	position: absolute;
+	top: -50%;
+	right: -20%;
+	width: 400px;
+	height: 400px;
+	background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+	pointer-events: none;
+}
+
+.wpc-suite-header-main {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+	position: relative;
+	z-index: 1;
+}
+
+.wpc-suite-logo-box,
+.wpc-parent-dashboard-logo {
+	width: 56px;
+	height: 56px;
+	border-radius: 14px;
+	background: #ffffff;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+	flex-shrink: 0;
+}
+
+.wpc-suite-logo-box img,
+img.wpc-parent-dashboard-logo {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+}
+
+.wpc-suite-header-info {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.wpc-suite-title-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.wpc-suite-title,
+.wpc-parent-dashboard-title {
+	margin: 0;
+	font-size: 26px;
+	font-weight: 800;
+	color: #ffffff;
+	letter-spacing: -0.025em;
+	line-height: 1.2;
+}
+
+.wpc-suite-tagline,
+.wpc-parent-dashboard-tagline {
+	margin: 0;
+	font-size: 14px;
+	color: #94a3b8;
+	max-width: 650px;
+	line-height: 1.5;
+}
+
+.wpc-suite-badge-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 10px;
+	background: rgba(16, 185, 129, 0.15);
+	border: 1px solid rgba(16, 185, 129, 0.4);
+	color: #34d399;
+	border-radius: 9999px;
+	letter-spacing: 0.02em;
+}
+
+.wpc-status-dot {
+	width: 7px;
+	height: 7px;
+	background: #10b981;
+	border-radius: 50%;
+	display: inline-block;
+	box-shadow: 0 0 8px #10b981;
+	animation: wpc-pulse 2s infinite ease-in-out;
+}
+
+@keyframes wpc-pulse {
+	0%, 100% { opacity: 1; transform: scale(1); }
+	50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.wpc-suite-badge-hpos {
+	display: inline-flex;
+	align-items: center;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 10px;
+	background: rgba(59, 130, 246, 0.15);
+	border: 1px solid rgba(59, 130, 246, 0.4);
+	color: #60a5fa;
+	border-radius: 9999px;
+}
+
+.wpc-suite-badge-version {
+	display: inline-flex;
+	align-items: center;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 8px;
+	background: rgba(255, 255, 255, 0.1);
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	color: #cbd5e1;
+	border-radius: 9999px;
+}
+
+.wpc-suite-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	position: relative;
+	z-index: 1;
+}
+
+.wpc-suite-header-actions .button.wpc-btn-primary {
+	background: #2563eb !important;
+	border-color: #1d4ed8 !important;
+	color: #ffffff !important;
+	box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+	font-weight: 700 !important;
+	padding: 8px 18px !important;
+	border-radius: 8px !important;
+}
+
+.wpc-suite-header-actions .button.wpc-btn-primary:hover {
+	background: #1d4ed8 !important;
+	box-shadow: 0 6px 16px rgba(37, 99, 235, 0.5) !important;
+}
+
+.wpc-suite-header-actions .button.wpc-btn-light {
+	background: rgba(255, 255, 255, 0.1) !important;
+	border-color: rgba(255, 255, 255, 0.25) !important;
+	color: #ffffff !important;
+	font-weight: 600 !important;
+	padding: 8px 16px !important;
+	border-radius: 8px !important;
+}
+
+.wpc-suite-header-actions .button.wpc-btn-light:hover {
+	background: rgba(255, 255, 255, 0.2) !important;
+	border-color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Suite Navigation Bar */
+.wpc-suite-nav {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 8px;
+	margin-bottom: 24px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+	flex-wrap: wrap;
+}
+
+.wpc-suite-nav-item {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 9px 18px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #475569;
+	text-decoration: none;
+	border-radius: 8px;
+	transition: all 0.15s ease;
+}
+
+.wpc-suite-nav-item:hover {
+	background: #f1f5f9;
+	color: #0f172a;
+}
+
+.wpc-suite-nav-item.active {
+	background: #0f172a;
+	color: #ffffff;
+	box-shadow: 0 2px 8px rgba(15, 23, 42, 0.15);
+}
+
+.wpc-suite-nav-item.active .dashicons {
+	color: #60a5fa;
+}
+
+/* Operational Statistics Grid */
+.wpc-suite-stats-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+	margin-bottom: 24px;
+}
+
+.wpc-stat-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 18px 20px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wpc-stat-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+}
+
+.wpc-stat-icon-wrap {
+	width: 48px;
+	height: 48px;
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+	flex-shrink: 0;
+}
+
+.wpc-stat-content {
+	display: flex;
+	flex-direction: column;
+}
+
+.wpc-stat-label {
+	font-size: 12px;
+	font-weight: 600;
+	color: #64748b;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	margin-bottom: 2px;
+}
+
+.wpc-stat-val {
+	font-size: 20px;
+	font-weight: 800;
+	color: #0f172a;
+	line-height: 1.2;
+}
+
+.wpc-stat-sub {
+	font-size: 11px;
+	color: #94a3b8;
+	margin-top: 2px;
+}
+
+/* Suite Main Grid Layout */
+.wpc-suite-main-grid,
+.wpc-dashboard-grid {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: 24px;
+	margin-bottom: 32px;
+}
+
+@media (max-width: 960px) {
+	.wpc-suite-main-grid,
+	.wpc-dashboard-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.wpc-suite-card,
+.wpc-dashboard-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 16px;
+	padding: 28px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.wpc-suite-featured-card,
+.wpc-card-featured {
+	position: relative;
+	border-color: #cbd5e1;
+	background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.wpc-featured-badge-row,
+.wpc-card-badge-row {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 16px;
+}
+
+.wpc-pill-active,
+.wpc-badge-active {
+	background: #ecfdf5;
+	color: #059669;
+	border: 1px solid #a7f3d0;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 3px 10px;
+	border-radius: 9999px;
+}
+
+.wpc-pill-version,
+.wpc-badge-version {
+	background: #f1f5f9;
+	color: #475569;
+	border: 1px solid #cbd5e1;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 8px;
+	border-radius: 9999px;
+}
+
+.wpc-featured-head h2,
+.wpc-dashboard-card h2 {
+	margin: 0 0 8px 0;
+	font-size: 22px;
+	font-weight: 800;
+	color: #0f172a;
+	letter-spacing: -0.02em;
+}
+
+.wpc-featured-desc,
+.wpc-dashboard-card p {
+	font-size: 14px;
+	color: #475569;
+	line-height: 1.6;
+	margin: 0 0 20px 0;
+}
+
+.wpc-capabilities-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+	margin: 20px 0 24px 0;
+}
+
+@media (max-width: 640px) {
+	.wpc-capabilities-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.wpc-cap-item {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 14px;
+	display: flex;
+	gap: 12px;
+	align-items: flex-start;
+}
+
+.wpc-cap-icon {
+	font-size: 22px;
+	line-height: 1;
+	flex-shrink: 0;
+	padding-top: 2px;
+}
+
+.wpc-cap-title {
+	margin: 0 0 4px 0;
+	font-size: 13px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.wpc-cap-text {
+	margin: 0;
+	font-size: 12px;
+	color: #64748b;
+	line-height: 1.5;
+}
+
+.wpc-featured-actions,
+.wpc-card-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+	padding-top: 16px;
+	border-top: 1px solid #e2e8f0;
+}
+
+/* Feature Bullets (Legacy support) */
+.wpc-feature-bullets {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 24px 0;
+}
+
+.wpc-feature-bullets li {
+	font-size: 13px;
+	color: #334155;
+	padding: 6px 0;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* Integration Card */
+.wpc-integration-card {
+	background: #ffffff;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.wpc-card-header-simple {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.wpc-card-icon-round {
+	width: 40px;
+	height: 40px;
+	border-radius: 10px;
+	background: #eff6ff;
+	color: #2563eb;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.wpc-card-title-simple {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.wpc-card-sub-simple {
+	margin: 2px 0 0 0;
+	font-size: 12px;
+	color: #64748b;
+}
+
+.wpc-steps-mini {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-top: 14px;
+}
+
+.wpc-step-mini-item {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 12px;
+	color: #334155;
+}
+
+.wpc-step-mini-num {
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	background: #e2e8f0;
+	color: #0f172a;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 11px;
+	flex-shrink: 0;
+}
+
+/* Ecosystem & Support Grid */
+.wpc-ecosystem-header {
+	margin: 36px 0 16px 0;
+}
+
+.wpc-ecosystem-header h2 {
+	margin: 0;
+	font-size: 20px;
+	font-weight: 800;
+	color: #0f172a;
+	letter-spacing: -0.02em;
+}
+
+.wpc-ecosystem-header p {
+	margin: 4px 0 0 0;
+	font-size: 13px;
+	color: #64748b;
+}
+
+.wpc-ecosystem-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 18px;
+}
+
+.wpc-eco-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 22px;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wpc-eco-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+	border-color: #cbd5e1;
+}
+
+.wpc-eco-icon {
+	font-size: 28px;
+	margin-bottom: 12px;
+}
+
+.wpc-eco-title {
+	margin: 0 0 6px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.wpc-eco-text {
+	margin: 0 0 16px 0;
+	font-size: 12px;
+	color: #64748b;
+	line-height: 1.5;
+	flex-grow: 1;
+}
+
+.wpc-eco-card .button {
+	align-self: flex-start;
+	font-size: 12px;
+	font-weight: 600;
+	padding: 4px 12px;
+}
+
+/* Legacy Resources list support */
+.wpc-resources-list {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	margin-bottom: 16px;
+}
+
+.wpc-resource-item {
+	font-size: 13px;
+	color: #334155;
+}
+
+.wpc-resource-item a {
+	color: #2563eb;
+	text-decoration: none;
+}
+
+.wpc-resource-item a:hover {
+	text-decoration: underline;
+}
+
+.wpc-card-footer-note {
+	font-size: 12px;
+	color: #64748b;
+	border-top: 1px solid #e2e8f0;
+	padding-top: 12px;
+	margin-top: 12px;
+}
+
+/* WhatsApp Button */
+.wpc-btn-whatsapp {
+	color: #059669 !important;
+	border-color: #a7f3d0 !important;
+	background: #ecfdf5 !important;
+}
+
+.wpc-btn-whatsapp:hover {
+	background: #d1fae5 !important;
+	color: #047857 !important;
+}
+
+/* Responsive Media Queries */
 @media (max-width: 600px) {
-	.wpc-st-title {
+	.wpc-st-title,
+	.wpc-suite-title {
 		font-size: 18px;
 	}
 

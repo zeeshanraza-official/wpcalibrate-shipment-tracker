@@ -29,10 +29,15 @@ class AssetManager {
 	 * @return void
 	 */
 	public function enqueue_admin_assets(string $hook_suffix): void {
-		$is_settings_screen = str_contains($hook_suffix, MenuManager::SUBMENU_SLUG) || str_contains($hook_suffix, MenuManager::PARENT_SLUG);
-		$is_order_screen = false;
+		$screen = function_exists('get_current_screen') ? get_current_screen() : null;
+		$screen_id = $screen ? (string) $screen->id : '';
 
-		$screen = get_current_screen();
+		$is_suite_screen = str_contains($hook_suffix, MenuManager::SUBMENU_SLUG) 
+			|| str_contains($hook_suffix, MenuManager::PARENT_SLUG)
+			|| str_contains($hook_suffix, 'wpcalibrate')
+			|| str_contains($screen_id, 'wpcalibrate');
+
+		$is_order_screen = false;
 		if ($screen) {
 			if ($screen->id === 'shop_order') {
 				$is_order_screen = true;
@@ -43,16 +48,23 @@ class AssetManager {
 			}
 		}
 
-		if (!$is_settings_screen && !$is_order_screen) {
+		if (!$is_suite_screen && !$is_order_screen) {
 			return;
 		}
+
+		// Cache-busting asset version based on file modification timestamp to bypass browser caching.
+		$css_file = defined('WPC_SHIPMENT_TRACKER_PATH') ? WPC_SHIPMENT_TRACKER_PATH . 'assets/css/admin.css' : '';
+		$css_version = (!empty($css_file) && file_exists($css_file)) ? (string) filemtime($css_file) : WPC_SHIPMENT_TRACKER_VERSION;
+
+		$js_file = defined('WPC_SHIPMENT_TRACKER_PATH') ? WPC_SHIPMENT_TRACKER_PATH . 'assets/js/admin.js' : '';
+		$js_version = (!empty($js_file) && file_exists($js_file)) ? (string) filemtime($js_file) : WPC_SHIPMENT_TRACKER_VERSION;
 
 		// Enqueue admin CSS.
 		wp_enqueue_style(
 			'wpcalibrate-shipment-tracker-admin',
 			WPC_SHIPMENT_TRACKER_URL . 'assets/css/admin.css',
 			[],
-			WPC_SHIPMENT_TRACKER_VERSION
+			$css_version
 		);
 
 		// Enqueue admin JS.
@@ -60,7 +72,7 @@ class AssetManager {
 			'wpcalibrate-shipment-tracker-admin',
 			WPC_SHIPMENT_TRACKER_URL . 'assets/js/admin.js',
 			['jquery'],
-			WPC_SHIPMENT_TRACKER_VERSION,
+			$js_version,
 			true
 		);
 

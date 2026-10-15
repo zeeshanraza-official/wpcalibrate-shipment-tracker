@@ -75,6 +75,10 @@ $is_hpos_active = class_exists(\Automattic\WooCommerce\Utilities\OrderUtil::clas
 			</div>
 		</div>
 		<div class="wpc-st-header-actions">
+			<a href="<?php echo esc_url(admin_url('admin.php?page=wpcalibrate')); ?>" class="button button-secondary">
+				<span class="dashicons dashicons-arrow-left-alt" style="margin-top: 3px;"></span>
+				<?php esc_html_e('Suite Overview', 'wpcalibrate-shipment-tracker'); ?>
+			</a>
 			<a href="<?php echo esc_url($orders_url); ?>" class="button button-secondary">
 				<span class="dashicons dashicons-cart" style="margin-top: 3px;"></span>
 				<?php esc_html_e('WooCommerce Orders', 'wpcalibrate-shipment-tracker'); ?>

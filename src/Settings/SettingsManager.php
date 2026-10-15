@@ -202,6 +202,22 @@ class SettingsManager {
 	 * @return void
 	 */
 	public function render(): void {
+		// Restore settings feedback from transient after redirect
+		$transient_errors = get_transient('settings_errors');
+		if (!empty($transient_errors) && is_array($transient_errors)) {
+			delete_transient('settings_errors');
+			foreach ($transient_errors as $err) {
+				if (is_array($err) && !empty($err['message'])) {
+					add_settings_error(
+						$err['setting'] ?? 'wpc_st_settings',
+						$err['code'] ?? 'updated',
+						$err['message'],
+						$err['type'] ?? 'success'
+					);
+				}
+			}
+		}
+
 		$current_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'overview';
 		$settings = $this->get_all();
 
