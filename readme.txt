@@ -72,11 +72,22 @@ WPCalibrate Shipment Tracker processes order IDs, carrier names, tracking number
 
 == Changelog ==
 
+= 1.0.2 =
+* Fix: Eliminated duplicate plugin folders on remote WordPress servers. Enforced single canonical installation path at wpcalibrate-shipment-tracker.
+* Enhancement: Complete card-based redesign across all 8 settings tabs (Overview, General, Tracking, Carriers, Emails, Advanced, License, Support).
+* Feature: Animated custom toggle switches and segmented Dashicons navigation bar.
+
+= 1.0.1 =
+* Feature: Comprehensive Overview tab with logistics pipeline diagram and operator guides.
+* Feature: Built-in 5 demo products seeder under Advanced tab.
+* Fix: Admin menu branding icon sizing and high-resolution dark branding dashboard header.
+
 = 1.0.0 =
 * Initial release.
 * Multi-shipment and partial fulfillment support for WooCommerce orders.
 * HPOS (High-Performance Order Storage) and Cart/Checkout Blocks compatibility.
 * Predefined carrier registry (UPS, FedEx, USPS, DHL Express, Royal Mail, Canada Post, Australia Post) and custom carrier management.
 * Dedicated customer email notification and email integration hooks.
-* Rate-limited public tracking page shortcode `[wpcalibrate_shipment_tracking]`.
+* Rate-limited public tracking page shortcode [wpcalibrate_shipment_tracking].
 * Event-based shipment progress timeline.
+

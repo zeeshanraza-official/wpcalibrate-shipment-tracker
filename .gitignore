@@ -1,4 +1,7 @@
-# OS metadata
+# Git ignore for standalone plugin directory
 .DS_Store
 Thumbs.db
 *.log
+*.zip
+.idea/
+.vscode/
