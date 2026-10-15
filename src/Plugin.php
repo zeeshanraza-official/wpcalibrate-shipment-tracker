@@ -162,6 +162,17 @@ final class Plugin {
 			$asset_manager = new \WPCalibrate\ShipmentTracker\Admin\AssetManager();
 			$asset_manager->init();
 		}
+
+		// GitHub Dashboard Automated Updates Checker
+		if (class_exists('WPCalibrate\\ShipmentTracker\\Updates\\GitHubUpdater')) {
+			$github_updater = new \WPCalibrate\ShipmentTracker\Updates\GitHubUpdater(
+				'zeeshanraza-official',
+				'wpcalibrate-shipment-tracker',
+				WPC_SHIPMENT_TRACKER_FILE,
+				WPC_SHIPMENT_TRACKER_VERSION
+			);
+			$github_updater->init();
+		}
 	}
 
 	/**
