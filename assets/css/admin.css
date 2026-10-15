@@ -1,0 +1,1328 @@
+/**
+ * WPCalibrate Shipment Tracker - Admin Styles
+ * WCAG 2.2 AA compliant, RTL-ready via CSS logical properties, cleanly scoped.
+ */
+
+/* Meta box wrap */
+.wpc-st-meta-box-wrap {
+	margin: 0;
+	padding: 12px 0 0;
+	font-family: inherit;
+}
+
+/* Header bar */
+.wpc-st-box-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #dcdcde;
+	margin-bottom: 16px;
+}
+
+.wpc-st-box-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 14px;
+	color: #1d2327;
+}
+
+.wpc-st-badge-count {
+	display: inline-block;
+	padding: 2px 8px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.4;
+	color: #2271b1;
+	background-color: #f0f6fc;
+	border: 1px solid #cce5ff;
+	border-radius: 12px;
+}
+
+/* Status Badges */
+.wpc-st-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 3px 10px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+	border-radius: 4px;
+	text-transform: capitalize;
+}
+
+.wpc-st-status-delivered {
+	background-color: #edfaef;
+	color: #1a7f37;
+	border: 1px solid #b4e3be;
+}
+
+.wpc-st-status-shipping {
+	background-color: #f0f6fc;
+	color: #0969da;
+	border: 1px solid #bbdfff;
+}
+
+.wpc-st-status-exception {
+	background-color: #fff8c5;
+	color: #9a6700;
+	border: 1px solid #fae17d;
+}
+
+.wpc-st-status-returned {
+	background-color: #ffebe9;
+	color: #cf222e;
+	border: 1px solid #ffc1c0;
+}
+
+.wpc-st-status-preparing {
+	background-color: #f6f8fa;
+	color: #57606a;
+	border: 1px solid #d0d7de;
+}
+
+/* Empty State */
+.wpc-st-empty-state {
+	padding: 24px;
+	text-align: center;
+	background: #f6f7f7;
+	border: 1px dashed #c3c4c7;
+	border-radius: 6px;
+	margin-bottom: 20px;
+}
+
+.wpc-st-empty-text {
+	margin: 0;
+	font-size: 14px;
+	font-weight: 500;
+	color: #50575e;
+}
+
+.wpc-st-empty-hint {
+	margin: 6px 0 0;
+	font-size: 13px;
+	color: #646970;
+}
+
+/* Shipment Cards */
+.wpc-st-shipments-list {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	margin-bottom: 24px;
+}
+
+.wpc-st-shipment-card {
+	background: #ffffff;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+	overflow: hidden;
+	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.wpc-st-shipment-card:hover {
+	border-color: #c3c4c7;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.wpc-st-card-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	background: #f9f9f9;
+	border-bottom: 1px solid #f0f0f1;
+}
+
+.wpc-st-card-main-info {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.wpc-st-carrier-name {
+	font-weight: 700;
+	font-size: 14px;
+	color: #1d2327;
+}
+
+.wpc-st-tracking-link {
+	font-family: monospace;
+	font-size: 13px;
+	font-weight: 600;
+	color: #2271b1;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.wpc-st-tracking-link:hover,
+.wpc-st-tracking-link:focus-visible {
+	text-decoration: underline;
+	color: #135e96;
+}
+
+.wpc-st-card-actions {
+	display: flex;
+	gap: 6px;
+}
+
+.wpc-st-card-body {
+	padding: 14px 16px;
+}
+
+.wpc-st-card-meta-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.wpc-st-meta-label {
+	display: block;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #646970;
+	margin-bottom: 2px;
+}
+
+.wpc-st-meta-value {
+	font-size: 13px;
+	font-weight: 500;
+	color: #1d2327;
+}
+
+/* Assigned Items Chips */
+.wpc-st-section-subheading {
+	margin: 0 0 8px;
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+	color: #50575e;
+}
+
+.wpc-st-item-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.wpc-st-item-chip {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 4px 10px;
+	background: #f0f0f1;
+	border: 1px solid #dcdcde;
+	border-radius: 14px;
+	font-size: 12px;
+	color: #2c3338;
+}
+
+.wpc-st-chip-qty {
+	font-weight: 700;
+	color: #2271b1;
+}
+
+/* Card Notes */
+.wpc-st-card-notes {
+	margin-top: 14px;
+	padding-top: 12px;
+	border-top: 1px solid #f0f0f1;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.wpc-st-note {
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.wpc-st-note-title {
+	font-weight: 600;
+	color: #50575e;
+	margin-inline-end: 4px;
+}
+
+.wpc-st-note p {
+	display: inline;
+	margin: 0;
+	color: #1d2327;
+}
+
+/* Allocation Summary Table */
+.wpc-st-allocation-summary {
+	margin-top: 20px;
+	padding-top: 16px;
+	border-top: 1px solid #dcdcde;
+}
+
+.wpc-st-col-qty {
+	text-align: center;
+	width: 110px;
+}
+
+.wpc-st-qty-pending {
+	display: inline-block;
+	padding: 2px 8px;
+	font-weight: 700;
+	color: #9a6700;
+	background: #fff8c5;
+	border-radius: 4px;
+}
+
+.wpc-st-qty-done {
+	color: #1a7f37;
+	font-weight: 600;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+/* Modal Dialog */
+.wpc-st-modal-backdrop {
+	position: fixed;
+	top: 0;
+	inset-inline-start: 0;
+	width: 100vw;
+	height: 100vh;
+	background: rgba(0, 0, 0, 0.55);
+	backdrop-filter: blur(2px);
+	z-index: 100050;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+.wpc-st-modal-dialog {
+	background: #ffffff;
+	width: 100%;
+	max-width: 680px;
+	max-height: 90vh;
+	border-radius: 8px;
+	box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+}
+
+.wpc-st-modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px 20px;
+	border-bottom: 1px solid #dcdcde;
+	background: #fcfcfc;
+}
+
+.wpc-st-modal-title {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	color: #1d2327;
+}
+
+.wpc-st-modal-close {
+	background: transparent;
+	border: none;
+	font-size: 22px;
+	line-height: 1;
+	cursor: pointer;
+	color: #646970;
+	padding: 4px 8px;
+	border-radius: 4px;
+}
+
+.wpc-st-modal-close:hover,
+.wpc-st-modal-close:focus-visible {
+	background: #f0f0f1;
+	color: #1d2327;
+}
+
+.wpc-st-modal-body {
+	padding: 20px;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.wpc-st-modal-footer {
+	padding: 14px 20px;
+	background: #fcfcfc;
+	border-top: 1px solid #dcdcde;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+}
+
+/* Modal Form Controls */
+.wpc-st-form-row {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.wpc-st-form-row-split {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.wpc-st-form-row-dates {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	gap: 12px;
+}
+
+.wpc-st-label {
+	font-size: 13px;
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.wpc-st-label .required {
+	color: #d63638;
+}
+
+.wpc-st-input,
+.wpc-st-select,
+.wpc-st-textarea {
+	width: 100%;
+	padding: 6px 10px;
+	border: 1px solid #8c8f94;
+	border-radius: 4px;
+	font-size: 13px;
+	line-height: 1.5;
+	box-sizing: border-box;
+}
+
+.wpc-st-input:focus-visible,
+.wpc-st-select:focus-visible,
+.wpc-st-textarea:focus-visible {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+	outline: 2px solid transparent;
+}
+
+.wpc-st-field-hint {
+	font-size: 12px;
+	color: #646970;
+}
+
+.wpc-st-section-header-flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.wpc-st-qty-input-group {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	justify-content: center;
+}
+
+.wpc-st-input-qty {
+	width: 70px !important;
+	text-align: center;
+}
+
+.wpc-st-form-alert {
+	padding: 10px 14px;
+	border-radius: 4px;
+	background: #ffebe9;
+	border: 1px solid #ff8182;
+	color: #cf222e;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+/* Settings Page Banner */
+.wpc-st-header-banner {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 18px 24px;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	margin-bottom: 20px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.wpc-st-header-logo-group {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+}
+
+.wpc-st-brand-icon {
+	width: 44px;
+	height: 44px;
+	max-width: 44px;
+	max-height: 44px;
+	border-radius: 8px;
+	object-fit: contain;
+	display: block;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.wpc-st-title {
+	margin: 0;
+	font-size: 22px;
+	font-weight: 700;
+	color: #0f172a;
+	display: inline-block;
+	letter-spacing: -0.02em;
+}
+
+.wpc-st-version-tag {
+	display: inline-block;
+	font-size: 11px;
+	font-weight: 700;
+	padding: 2px 8px;
+	background: #eff6ff;
+	border: 1px solid #bfdbfe;
+	border-radius: 12px;
+	margin-inline-start: 8px;
+	color: #1d4ed8;
+	vertical-align: middle;
+}
+
+.wpc-st-badge-status {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 11px;
+	font-weight: 600;
+	padding: 3px 10px;
+	background: #ecfdf5;
+	border: 1px solid #a7f3d0;
+	color: #047857;
+	border-radius: 12px;
+	margin-inline-start: 8px;
+}
+
+.wpc-st-badge-status::before {
+	content: "";
+	display: inline-block;
+	width: 6px;
+	height: 6px;
+	background: #10b981;
+	border-radius: 50%;
+}
+
+.wpc-st-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Modern Tab Navigation */
+.wpc-st-nav-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	border-bottom: 2px solid #e2e8f0;
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+
+.wpc-st-nav-tabs .nav-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	padding: 10px 18px;
+	font-size: 13px;
+	font-weight: 600;
+	color: #64748b;
+	background: transparent;
+	border: none;
+	border-bottom: 3px solid transparent;
+	border-radius: 8px 8px 0 0;
+	margin: 0 0 -2px 0;
+	transition: all 0.15s ease-in-out;
+	text-decoration: none;
+}
+
+.wpc-st-nav-tabs .nav-tab .dashicons {
+	font-size: 17px;
+	width: 17px;
+	height: 17px;
+	line-height: 17px;
+	color: inherit;
+}
+
+.wpc-st-nav-tabs .nav-tab:hover {
+	color: #0f172a;
+	background: #f8fafc;
+}
+
+.wpc-st-nav-tabs .nav-tab.nav-tab-active {
+	color: #2563eb;
+	background: #ffffff;
+	border-bottom-color: #2563eb;
+}
+
+/* Tab Content Canvas */
+.wpc-st-tab-content {
+	background: transparent;
+	border: none;
+	padding: 0;
+	margin-top: 0;
+}
+
+/* Modern Cards System */
+.wpc-panel {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px;
+	margin-bottom: 24px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.wpc-panel-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #f1f5f9;
+}
+
+.wpc-panel-title-group {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.wpc-panel-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 36px;
+	height: 36px;
+	border-radius: 8px;
+	background: #f1f5f9;
+	color: #334155;
+	font-size: 18px;
+}
+
+.wpc-panel-title {
+	margin: 0 !important;
+	font-size: 16px !important;
+	font-weight: 700 !important;
+	color: #0f172a !important;
+}
+
+.wpc-panel-description {
+	margin: 4px 0 0 0 !important;
+	font-size: 13px !important;
+	color: #64748b !important;
+}
+
+/* Setting Rows & Toggle Switch */
+.wpc-setting-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 16px;
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	margin-bottom: 14px;
+	transition: background 0.15s ease-in-out;
+}
+
+.wpc-setting-card:hover {
+	background: #f1f5f9;
+}
+
+.wpc-setting-info {
+	flex: 1;
+	padding-right: 20px;
+}
+
+.wpc-setting-label {
+	font-size: 14px;
+	font-weight: 600;
+	color: #0f172a;
+	margin-bottom: 4px;
+	display: block;
+}
+
+.wpc-setting-desc {
+	font-size: 12px;
+	color: #64748b;
+	margin: 0;
+	line-height: 1.5;
+}
+
+/* Custom CSS Toggle Switch */
+.wpc-switch {
+	position: relative;
+	display: inline-block;
+	width: 44px;
+	height: 24px;
+	flex-shrink: 0;
+}
+
+.wpc-switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.wpc-slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #cbd5e1;
+	transition: .25s ease;
+	border-radius: 24px;
+}
+
+.wpc-slider:before {
+	position: absolute;
+	content: "";
+	height: 18px;
+	width: 18px;
+	left: 3px;
+	bottom: 3px;
+	background-color: #ffffff;
+	transition: .25s ease;
+	border-radius: 50%;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+.wpc-switch input:checked + .wpc-slider {
+	background-color: #2563eb;
+}
+
+.wpc-switch input:checked + .wpc-slider:before {
+	transform: translateX(20px);
+}
+
+.wpc-switch input:focus + .wpc-slider {
+	box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+/* Select Control Enhancements */
+.wpc-select-group {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.wpc-select-group select {
+	min-width: 260px;
+	padding: 6px 12px;
+	border-radius: 6px;
+	border-color: #cbd5e1;
+	font-size: 13px;
+}
+
+/* Save Bar */
+.wpc-save-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 16px;
+	border-top: 1px solid #e2e8f0;
+	margin-top: 20px;
+}
+
+/* Overview Tab Elevated Styling */
+.wpc-overview-hero {
+	background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+	border-radius: 12px;
+	padding: 32px;
+	margin-bottom: 28px;
+	color: #ffffff;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+.wpc-overview-hero h2 {
+	margin: 0 0 10px 0;
+	font-size: 24px;
+	font-weight: 700;
+	color: #ffffff !important;
+	letter-spacing: -0.02em;
+}
+
+.wpc-overview-hero p {
+	margin: 0 0 24px 0;
+	font-size: 14px;
+	line-height: 1.6;
+	color: #cbd5e1 !important;
+	max-width: 840px;
+}
+
+.wpc-overview-metrics {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+}
+
+.wpc-metric-card {
+	background: rgba(255, 255, 255, 0.08);
+	backdrop-filter: blur(8px);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+	border-radius: 8px;
+	padding: 16px 20px;
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	transition: background 0.15s ease-in-out;
+}
+
+.wpc-metric-card:hover {
+	background: rgba(255, 255, 255, 0.12);
+}
+
+.wpc-metric-icon {
+	font-size: 28px;
+	line-height: 1;
+}
+
+.wpc-metric-label {
+	font-size: 14px;
+	font-weight: 700;
+	color: #ffffff;
+	margin: 0 0 2px 0;
+}
+
+.wpc-metric-sub {
+	font-size: 12px;
+	color: #94a3b8;
+	margin: 0;
+}
+
+/* Purpose Feature Cards Grid */
+.wpc-feature-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 20px;
+	margin-bottom: 28px;
+}
+
+.wpc-feature-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 22px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+	transition: transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	border-top: 4px solid #2563eb;
+}
+
+.wpc-feature-card:nth-child(2) {
+	border-top-color: #7c3aed;
+}
+
+.wpc-feature-card:nth-child(3) {
+	border-top-color: #059669;
+}
+
+.wpc-feature-card:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.06);
+}
+
+.wpc-feature-card h4 {
+	margin: 0 0 10px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wpc-feature-card p {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #475569;
+}
+
+/* Method Workflow Cards */
+.wpc-workflow-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+	gap: 16px;
+	margin-bottom: 28px;
+}
+
+.wpc-workflow-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 20px;
+	position: relative;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.wpc-workflow-number {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	border-radius: 50%;
+	background: #2563eb;
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 14px;
+	margin-bottom: 12px;
+	box-shadow: 0 2px 4px rgba(37, 99, 235, 0.25);
+}
+
+.wpc-workflow-card h4 {
+	margin: 0 0 8px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.wpc-workflow-card p {
+	margin: 0;
+	font-size: 13px;
+	color: #475569;
+	line-height: 1.5;
+}
+
+/* How to use Accordion / Instruction Cards */
+.wpc-guide-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 22px;
+	margin-bottom: 16px;
+	box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.wpc-guide-card h4 {
+	margin: 0 0 12px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wpc-guide-card ol {
+	margin: 0 0 0 20px;
+	padding: 0;
+	font-size: 13px;
+	line-height: 1.6;
+	color: #334155;
+}
+
+.wpc-guide-card li {
+	margin-bottom: 6px;
+}
+
+.wpc-shortcode-box {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #0f172a;
+	border-radius: 8px;
+	padding: 12px 16px;
+	margin: 12px 0;
+}
+
+.wpc-shortcode-code {
+	font-family: Consolas, Monaco, monospace;
+	font-size: 13px;
+	color: #38bdf8;
+	font-weight: 600;
+}
+
+/* Carriers Management Table & Forms */
+.wpc-carriers-table {
+	border: 1px solid #e2e8f0 !important;
+	border-radius: 8px !important;
+	overflow: hidden;
+	box-shadow: none !important;
+	margin-bottom: 24px;
+}
+
+.wpc-carriers-table thead th {
+	background: #f8fafc !important;
+	font-size: 12px !important;
+	font-weight: 700 !important;
+	color: #475569 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.05em !important;
+	padding: 12px 16px !important;
+	border-bottom: 1px solid #e2e8f0 !important;
+}
+
+.wpc-carriers-table tbody td {
+	padding: 14px 16px !important;
+	vertical-align: middle !important;
+	border-bottom: 1px solid #f1f5f9 !important;
+	font-size: 13px;
+}
+
+.wpc-carrier-title-cell {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.wpc-carrier-icon-badge {
+	width: 32px;
+	height: 32px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 6px;
+	background: #eff6ff;
+	color: #2563eb;
+	font-weight: 700;
+	font-size: 14px;
+}
+
+.wpc-carrier-badge-active {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 600;
+	background: #ecfdf5;
+	color: #047857;
+	border: 1px solid #a7f3d0;
+}
+
+.wpc-carrier-badge-disabled {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 600;
+	background: #f1f5f9;
+	color: #64748b;
+	border: 1px solid #e2e8f0;
+}
+
+/* Diagnostics Metric Grid */
+.wpc-diag-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 14px;
+	margin-top: 16px;
+}
+
+.wpc-diag-card {
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 14px 16px;
+}
+
+.wpc-diag-label {
+	font-size: 12px;
+	color: #64748b;
+	margin: 0 0 4px 0;
+	text-transform: uppercase;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+}
+
+.wpc-diag-val {
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+	margin: 0;
+	font-family: Consolas, Monaco, monospace;
+}
+
+/* Demo Products Preview Pill */
+.wpc-demo-products-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+	gap: 12px;
+	margin: 16px 0;
+}
+
+.wpc-demo-item-pill {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 8px;
+	padding: 10px 14px;
+}
+
+.wpc-demo-item-title {
+	font-size: 13px;
+	font-weight: 600;
+	color: #0f172a;
+}
+
+.wpc-demo-item-meta {
+	font-size: 12px;
+	font-family: Consolas, monospace;
+	color: #2563eb;
+	background: #eff6ff;
+	padding: 2px 6px;
+	border-radius: 4px;
+}
+
+/* Support Tab Grid */
+.wpc-support-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+	gap: 18px;
+	margin-top: 16px;
+}
+
+.wpc-support-card {
+	background: #f8fafc;
+	border: 1px solid #e2e8f0;
+	border-radius: 10px;
+	padding: 20px;
+	display: flex;
+	flex-direction: column;
+	transition: background 0.15s ease-in-out;
+}
+
+.wpc-support-card:hover {
+	background: #f1f5f9;
+}
+
+.wpc-support-icon {
+	font-size: 26px;
+	margin-bottom: 10px;
+	line-height: 1;
+}
+
+.wpc-support-card h4 {
+	margin: 0 0 6px 0;
+	font-size: 15px;
+	font-weight: 700;
+	color: #0f172a;
+}
+
+.wpc-support-card p {
+	margin: 0 0 14px 0;
+	font-size: 13px;
+	color: #64748b;
+	line-height: 1.5;
+}
+
+.wpc-support-card a.button {
+	margin-top: auto;
+}
+
+/* WPCalibrate Parent Dashboard & Branding */
+.wpcalibrate-admin-wrap {
+	max-width: 1200px;
+	margin-top: 20px;
+}
+
+.wpc-parent-dashboard-header {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px;
+	margin-bottom: 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.wpc-parent-dashboard-logo {
+	width: 52px;
+	height: 52px;
+	max-width: 52px;
+	max-height: 52px;
+	object-fit: contain;
+	border-radius: 8px;
+}
+
+.wpc-parent-dashboard-title {
+	margin: 0 0 4px 0 !important;
+	font-size: 24px !important;
+	font-weight: 700 !important;
+	color: #0f172a !important;
+}
+
+.wpc-parent-dashboard-tagline {
+	margin: 0 !important;
+	font-size: 14px !important;
+	color: #64748b !important;
+}
+
+.wpc-dashboard-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+	gap: 24px;
+}
+
+.wpc-dashboard-card {
+	background: #ffffff;
+	border: 1px solid #e2e8f0;
+	border-radius: 12px;
+	padding: 24px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+	display: flex;
+	flex-direction: column;
+}
+
+.wpc-card-featured {
+	border-color: #2563eb;
+	border-width: 2px;
+}
+
+.wpc-card-badge-row {
+	display: flex;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.wpc-badge-active {
+	background: #edfaef;
+	color: #1a7f37;
+	border: 1px solid #b4e3be;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+}
+
+.wpc-badge-version {
+	background: #f0f6fc;
+	color: #0969da;
+	border: 1px solid #bbdfff;
+	padding: 2px 8px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 600;
+}
+
+.wpc-dashboard-card h2 {
+	margin-top: 0;
+	margin-bottom: 10px;
+	font-size: 18px;
+	color: #1d2327;
+}
+
+.wpc-feature-bullets {
+	margin: 16px 0;
+	padding-left: 0;
+	list-style: none;
+}
+
+.wpc-feature-bullets li {
+	margin-bottom: 8px;
+	font-size: 13px;
+	color: #3c434a;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.wpc-card-actions {
+	margin-top: auto;
+	display: flex;
+	gap: 12px;
+	padding-top: 16px;
+	flex-wrap: wrap;
+}
+
+.wpc-resources-list {
+	margin: 16px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.wpc-resource-item {
+	font-size: 13px;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px dashed #f0f0f1;
+	padding-bottom: 8px;
+}
+
+.wpc-card-footer-note {
+	margin-top: auto;
+	padding-top: 16px;
+	font-size: 12px;
+	color: #646970;
+	border-top: 1px solid #f0f0f1;
+}
+
+/* Responsive queries */
+@media (max-width: 782px) {
+	.wpc-st-header-banner {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 14px;
+	}
+
+	.wpc-setting-card {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 14px;
+	}
+
+	.wpc-switch {
+		align-self: flex-start;
+	}
+
+	.wpc-st-nav-tabs .nav-tab {
+		flex: 1 1 auto;
+		text-align: center;
+		justify-content: center;
+	}
+}
+
+@media (max-width: 600px) {
+	.wpc-st-form-row-split,
+	.wpc-st-form-row-dates {
+		grid-template-columns: 1fr;
+	}
+
+	.wpc-st-card-header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 10px;
+	}
+
+	.wpc-st-card-actions {
+		width: 100%;
+		justify-content: flex-end;
+	}
+}
