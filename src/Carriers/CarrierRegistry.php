@@ -187,6 +187,15 @@ class CarrierRegistry {
 	}
 
 	/**
+	 * Get enabled carriers only (alias for get_enabled).
+	 *
+	 * @return array<string, array<string, mixed>>
+	 */
+	public function get_enabled_carriers(): array {
+		return $this->get_enabled();
+	}
+
+	/**
 	 * Get a specific carrier by key.
 	 *
 	 * @param string $key Carrier key.

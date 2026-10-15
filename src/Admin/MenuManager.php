@@ -169,18 +169,28 @@ class MenuManager {
 
 		$is_hpos_active = class_exists(\Automattic\WooCommerce\Utilities\OrderUtil::class) && \Automattic\WooCommerce\Utilities\OrderUtil::custom_orders_table_usage_is_enabled();
 
-		// Live count of shipments recorded in database.
-		$shipments_table = $wpdb->prefix . 'wpcalibrate_shipments';
+		// Live count of shipments recorded in database (safe with try-catch).
 		$total_shipments = 0;
-		if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $shipments_table)) === $shipments_table) {
-			$total_shipments = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$shipments_table}");
+		try {
+			if (isset($wpdb) && is_object($wpdb)) {
+				$shipments_table = $wpdb->prefix . 'wpcalibrate_shipments';
+				if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $shipments_table)) === $shipments_table) {
+					$total_shipments = (int) $wpdb->get_var("SELECT COUNT(*) FROM {$shipments_table}");
+				}
+			}
+		} catch (\Throwable $e) {
+			$total_shipments = 0;
 		}
 
-		// Count of active carriers.
+		// Count of active carriers (safe with try-catch and fallback).
 		$carrier_count = 7;
-		if (class_exists(\WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry::class)) {
-			$registry = new \WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry();
-			$carrier_count = count($registry->get_enabled_carriers());
+		try {
+			if (class_exists(\WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry::class)) {
+				$registry = new \WPCalibrate\ShipmentTracker\Carriers\CarrierRegistry();
+				$carrier_count = count($registry->get_enabled());
+			}
+		} catch (\Throwable $e) {
+			$carrier_count = 7;
 		}
 		?>
 		<div class="wrap wpcalibrate-admin-wrap wpc-suite-wrap">

@@ -6,7 +6,7 @@ Tested up to: 7.1.3
 Requires PHP: 8.2
 WC requires at least: 8.5
 WC tested up to: 11.2.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -71,6 +71,10 @@ WPCalibrate Shipment Tracker processes order IDs, carrier names, tracking number
 * `wpcalibrate_shipment_tracker_guest_lookup_verification` (filter): Filter the verified order during guest tracking lookup.
 
 == Changelog ==
+
+= 1.0.4 =
+* Fix: Resolved fatal error on Suite Overview page by adding get_enabled_carriers() alias in CarrierRegistry.
+* Fix: Hardened database querying and carrier registry access with defensive try-catch error handling to prevent critical errors.
 
 = 1.0.3 =
 * Redesign: Enterprise WPCalibrate Suite Overview hub (admin.php?page=wpcalibrate) with live consignment metrics, operational health cards, and modern SaaS styling.
