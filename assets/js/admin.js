@@ -261,4 +261,61 @@
 			return $('<div>').text(text).html();
 		}
 	});
+
+	// Settings Dashboard Interactivity
+	$(document).ready(function() {
+		// Copy shortcode to clipboard
+		$(document).on('click', '.wpc-btn-copy-shortcode', function(e) {
+			e.preventDefault();
+			var $btn = $(this);
+			var textToCopy = $btn.data('clipboard-text') || '[wpcalibrate_shipment_tracking]';
+
+			if (navigator.clipboard && window.isSecureContext) {
+				navigator.clipboard.writeText(textToCopy).then(function() {
+					showCopiedFeedback($btn);
+				}).catch(function() {
+					fallbackCopy(textToCopy, $btn);
+				});
+			} else {
+				fallbackCopy(textToCopy, $btn);
+			}
+		});
+
+		function showCopiedFeedback($btn) {
+			var origHtml = $btn.html();
+			$btn.html('<span class="dashicons dashicons-yes"></span> Copied!').addClass('wpc-btn-copied');
+			setTimeout(function() {
+				$btn.html(origHtml).removeClass('wpc-btn-copied');
+			}, 2500);
+		}
+
+		function fallbackCopy(text, $btn) {
+			var $temp = $('<input>');
+			$('body').append($temp);
+			$temp.val(text).select();
+			try {
+				document.execCommand('copy');
+				showCopiedFeedback($btn);
+			} catch (err) {
+				alert('Shortcode: ' + text);
+			}
+			$temp.remove();
+		}
+
+		// Carrier URL template token preview helper
+		$('#wpc-st-custom-template').on('input', function() {
+			var val = $(this).val();
+			var $hint = $('#wpc-token-preview-hint');
+			if ($hint.length) {
+				if (val.indexOf('{tracking_number}') !== -1) {
+					$hint.html('Preview: <strong style="color:#059669;">' + val.replace('{tracking_number}', '1Z9999999999999999') + '</strong>');
+				} else if (val.length > 0) {
+					$hint.html('<span style="color:#dc2626;">Missing <code>{tracking_number}</code> placeholder token.</span>');
+				} else {
+					$hint.empty();
+				}
+			}
+		});
+	});
 })(jQuery);
+
